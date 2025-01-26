@@ -12,7 +12,7 @@ PubSubClient client(espClient); //Object for Publish/Subscribe client
 
 const int led_red = 19; // For red LED to simulate warning light
 const int relay_pin = 32; // For Octocoupler pin that controls the fan (ventilation)
-const int smoke_pin = 14; // For green LED to simulate on/off
+const int smoke_pin = 14; // For smoke detector pin
 
 float smoke = 0; // Placeholder for smoke readings
 
@@ -65,18 +65,18 @@ void loop() {
 
   if (smoke > 400) {
     sprintf(buffer, "Air quality: %.2f", smoke);
-    sprintf(buffer, "Warning light and ventilation ON");
+    sprintf(buffer, "Light and ventilation ON");
 
     Serial.print("Air quality: ");
     Serial.println(smoke);
-    Serial.println("Air quality at danger level. Ventilation on.\n");
+    Serial.println("Air quality at unpleasant level. Ventilation on.\n");
     
     digitalWrite(led_red, HIGH);
     digitalWrite(relay_pin, true);
   }
   else {
     sprintf(buffer, "Air quality: %.2f", smoke);
-    sprintf(buffer, "Warning light and ventilation OFF");
+    sprintf(buffer, "Light and ventilation OFF");
 
     Serial.print("Air quality: ");
     Serial.println(smoke);
